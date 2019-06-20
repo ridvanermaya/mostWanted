@@ -10,6 +10,8 @@ function app(people){
     // TODO: search by name
     var foundPerson = searchByName(people);
     console.log(foundPerson);
+    displayPerson(foundPerson);
+    console.log(getAge(foundPerson));
     break;
     case 'no':
     // TODO: search by traits
@@ -57,8 +59,7 @@ function searchByName(people){
   var lastName = promptFor("What is the person's last name?", chars);
 
   var foundPerson = people.filter(person => person.lastName == lastName && person.firstName == firstName);
-  // TODO: find the person using the name they entered
-  return foundPerson;
+  return foundPerson[0];
 }
 
 // alerts a list of people
@@ -78,7 +79,8 @@ function displayPerson(person){
 }
 
 function getAge(person){
-  
+  let dob = person.dob;
+  return dob;
 }
 
 // function that prompts and validates user input
@@ -89,10 +91,16 @@ function promptFor(question, valid){  // "valid" is a callback!
   return response;
 }
 
+
+function promptForChecklist(){
+
+}
+
 // helper function to pass into promptFor to validate yes/no answers
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
+
 
 // helper function to pass in as default promptFor validation
 function chars(input){

@@ -1,0 +1,16 @@
+#questionBG{
+	z-index: 2;
+	background-color: rgba(200, 200, 200, 200);
+	display: none;
+}
+
+#promptChecklist{
+	z-index: 3;
+	background-color: white;
+	text-align: center;
+	display: none;
+}
+
+#prompt .input{
+	
+}
