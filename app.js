@@ -9,6 +9,7 @@ function app(people){
     case 'yes':
     // TODO: search by name
     var foundPerson = searchByName(people);
+    console.log(foundPerson);
     break;
     case 'no':
     // TODO: search by traits
@@ -55,14 +56,7 @@ function searchByName(people){
   var firstName = promptFor("What is the person's first name?", chars);
   var lastName = promptFor("What is the person's last name?", chars);
 
-  var foundPerson = people.filter(function(person){
-    if(person.firstName === firstName && person.lastName === lastName){
-      return true;
-    }
-    else{
-      return false;
-    }
-  });
+  var foundPerson = people.filter(person => person.lastName == lastName && person.firstName == firstName);
   // TODO: find the person using the name they entered
   return foundPerson;
 }
@@ -81,6 +75,10 @@ function displayPerson(person){
   personInfo += "Last Name: " + person.lastName + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+}
+
+function getAge(person){
+  
 }
 
 // function that prompts and validates user input
