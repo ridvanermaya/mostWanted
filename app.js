@@ -108,9 +108,12 @@ function chars(input){
 }
 
 function findPersonById(people, personId) {
-  let foundPerson = people.filter(person => person.id == personId);
-
+  let foundPerson = people.filter(person => person.id === personId);
   return foundPerson[0];
 }
 
-console.log(findPersonById(data, 313998000));
+function getParents(people, person) {
+  let getParentIds = person.parents;
+  let parents = people.filter(person => person.id === getParentIds[0] || person.id === getParentIds[1]);
+  return parents;
+}
