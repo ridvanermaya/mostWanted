@@ -1,7 +1,6 @@
 /*
 Build all of your functions for displaying and gathering information below (GUI).
 */
-
 // app is the function called to start the entire application
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -11,7 +10,7 @@ function app(people){
     var foundPerson = searchByName(people);
     console.log(foundPerson);
     displayPerson(foundPerson);
-    console.log(getAge(foundPerson));
+    
     break;
     case 'no':
     // TODO: search by traits
@@ -62,10 +61,38 @@ function searchByName(people){
   return foundPerson[0];
 }
 
+function findPersonById(people, personId) {
+  let foundPerson = people.filter(person => person.id == personId);
+
+  return foundPerson[0];
+}
+
+
+
+function findPeopleByCriteria(people, criteria){
+  let foundPeople = people.filter(person => true);
+  if(criteria.eyeColor !== undefined){
+    foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
+  }
+  if(criteria.gender !== undefined){
+    foundPeople = foundPeople.filter(person => person.gender == criteria.gender);
+  }
+  if(criteria.firstName !== undefined){
+    foundPeople = foundPeople.filter(person => person.firstName == criteria.firstName);
+  }
+  if(criteria.lastName !== undefined){
+    foundPeople = foundPeople.filter(person => person.lastName == criteria.lastName);
+  }
+  if(criteria.occupation !== undefined){
+    foundPeople = foundPeople.filter(person => person.occupation == criteria.occupation);
+  }
+  return foundPeople;
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
-    return person.firstName + " " + person.lastName;
+    return displayPerson(person);
   }).join("\n"));
 }
 
@@ -112,12 +139,6 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
-}
-
-function findPersonById(people, personId) {
-  let foundPerson = people.filter(person => person.id == personId);
-
-  return foundPerson[0];
 }
 
 console.log(findPersonById(data, 313998000));

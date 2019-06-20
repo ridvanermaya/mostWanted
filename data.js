@@ -287,3 +287,18 @@ const data = [
 		currentSpouse: null
 	}
 ];
+
+
+var emptyPerson = {
+	id: 313998000,
+	firstName: "Joey",
+	lastName: "Madden",
+	gender: "female",
+	dob: "2/02/1987",
+	height: 67,
+	weight: 100,
+	eyeColor: "blue",
+	occupation: "doctor",
+	parents: [313207561, 313997561],
+	currentSpouse: null
+}

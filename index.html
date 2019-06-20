@@ -8,6 +8,16 @@
   </head>
   <body>
     <button onclick="app(data)">Click to Search</button>
+    <div id='personPrompt'>
+    	<p>firstName <input id='firstName' type='text'/><br>
+    	lastName <input id='lastName' type='text'/><br>
+    	Age <input id='age' type='text'><br>
+    	Occupation <input id='occupation' type='text'/><br>
+    	Eye Color: <input id='eyeColor' type='text'><br>
+    	Date of Birth <input id='dob' type='text'/><br>
+    	</p>
+    	<input type='submit' value='Enter' onclick='findPeopleByCriteria()'/>
+    </div>
+    <div id='promptBG'></div>
   </body>
-
 </html>
