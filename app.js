@@ -98,3 +98,11 @@ function yesNo(input){
 function chars(input){
   return true; // default validation only
 }
+
+function findPersonById(people, personId) {
+  let foundPerson = people.filter(person => person.id == personId);
+
+  return foundPerson[0];
+}
+
+console.log(findPersonById(data, 313998000));
