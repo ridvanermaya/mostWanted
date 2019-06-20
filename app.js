@@ -67,8 +67,6 @@ function findPersonById(people, personId) {
   return foundPerson[0];
 }
 
-
-
 function findPeopleByCriteria(people, criteria){
   let foundPeople = people.filter(person => true);
   if(criteria.eyeColor !== undefined){
@@ -112,9 +110,16 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-function getAge(person){
-  let dob = person.dob;
-  return dob;
+function getPersonAge(dob) {
+  let today = new Date();
+  let birthDate = new Date(dob);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  let month = today.getMonth() - birthDate.getMonth();
+
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+    age = age - 1;
+  }
+  return age;
 }
 
 // function that prompts and validates user input
@@ -125,7 +130,6 @@ function promptFor(question, valid){  // "valid" is a callback!
   return response;
 }
 
-
 function promptForChecklist(){
 
 }
@@ -135,13 +139,11 @@ function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
 
-
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
 }
 
-<<<<<<< HEAD
 function findPersonById(people, personId) {
   let foundPerson = people.filter(person => person.id === personId);
   return foundPerson[0];
@@ -152,6 +154,3 @@ function getParents(people, person) {
   let parents = people.filter(person => person.id === getParentIds[0] || person.id === getParentIds[1]);
   return parents;
 }
-=======
-console.log(findPersonById(data, 313998000));
->>>>>>> 6671fb0078cc6d1c1f4cc66deb829dfc79c039be
