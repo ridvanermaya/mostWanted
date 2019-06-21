@@ -19,3 +19,37 @@
 #personPrompt input{
 
 }
+
+/* Main Body */
+body {
+	width: 90%;
+	margin: auto;
+	margin-top: 10px;
+	text-align: center;
+}
+
+/*  */
+.container {
+	background-color: lightgray;
+	border-radius: 10px;
+	width: auto;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.row {
+	margin: 0 auto;
+	margin-bottom: 10px;
+}
+
+.input-tag {
+	text-align: right;
+}
+
+.form-control {
+	width: 250px;
+}
+
+.btn-find-people {
+	margin-bottom: 10px;
+}
