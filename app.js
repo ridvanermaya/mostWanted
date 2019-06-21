@@ -61,6 +61,10 @@ function addDescriptiveData(){
 
 function capitalize(s){
   let capitalized = String.fromCharCode(s.charCodeAt(0)-32);
+
+  if(s === undefined || s == "")
+    return undefined;
+  
   for(let i=1; i<s.length; i++){
     if(s[i] == " " && s.charCodeAt(i+1) > 96 && s.charCodeAt(i+1) < 123){
       capitalized += " " + String.fromCharCode(s.charCodeAt(i+1)-32);
@@ -108,9 +112,15 @@ function searchByTraits(people, criteria){
   return foundPeople;
 }
 
-function enter(){
-  let searchObject = {eyeColor: document.getElementById('eyeColor').value, 
-  gender: document.getElementById('gender').value, firstName: capitalize(document.getElementById("firstName").value.toLowerCase())};
+function searchPeople(){
+  let searchObject = { 
+    firstName: capitalize(document.getElementById('firstName').value.toLowerCase()),
+    lastName: capitalize(document.getElementById('lastName').value.toLowerCase()),
+    eyeColor: document.getElementById('eyeColor').value.toLowerCase(),
+    occupation: document.getElementById('occupation').value.toLowerCase(),
+    age: document.getElementById('age').value, 
+    gender: document.getElementById('gender').value.toLowerCase()};
+
   return searchByTraits(data, searchObject);
 }
 
@@ -121,7 +131,7 @@ function getDescendants1(people, person){
   children = getChildren1(people, person);
 
   if(children === undefined || children.length == 0){
-    return undefined;
+    return;
   }
   
   children.push(children.map(child => {
