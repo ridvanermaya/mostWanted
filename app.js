@@ -2,7 +2,7 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 // app is the function called to start the entire application
-
+console.log(getDescendants1(data, findPersonById(data, 693243224)));
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
@@ -60,6 +60,10 @@ function addDescriptiveData(){
 
 function capitalize(s){
   let capitalized = String.fromCharCode(s.charCodeAt(0)-32);
+
+  if(s === undefined || s == "")
+    return undefined;
+  
   for(let i=1; i<s.length; i++){
     if(s[i] == " " && s.charCodeAt(i+1) > 96 && s.charCodeAt(i+1) < 123){
       capitalized += " " + String.fromCharCode(s.charCodeAt(i+1)-32);
@@ -108,11 +112,12 @@ function searchByTraits(people, criteria){
 }
 
 function searchPeople(){
-  let searchObject = {eyeColor: document.getElementById('eyeColor').value, gender: document.getElementById('gender').value, occupation: document.getElementById('occupation').value, age: document.getElementById('age').value, firstName: capitalize(document.getElementById('firstName').value.toLowerCase())};
-  // searchObject.firstName = capitalize(document.getElementById('firstName').value.toLowerCase());
-
-  // let searchObject = {firstName: capitalize(document.getElementById('firstName').value.toLowerCase())};
-  // age: document.getElementById('age').value
+  let searchObject = { 
+    firstName: capitalize(document.getElementById('firstName').value.toLowerCase()), 
+    eyeColor: document.getElementById('eyeColor').value,
+    occupation: document.getElementById('occupation').value,
+    age: document.getElementById('age').value, 
+    gender: document.getElementById('gender').value};
 
   return searchByTraits(data, searchObject);
 }
@@ -124,7 +129,7 @@ function getDescendants1(people, person){
   children = getChildren1(people, person);
 
   if(children === undefined || children.length == 0){
-    return undefined;
+    return;
   }
   
   children.push(children.map(child => {
