@@ -52,7 +52,6 @@ function mainMenu(person, people){
   }
 }
 
-
 function addDescriptiveData(){
   let people = data.map(function(person){ person.age = getAge(person); return person; });
 
@@ -87,44 +86,22 @@ function findPersonById(people, personId) {
   return foundPerson[0];
 }
 
-
 function searchByTraits(people, criteria){
-  let foundPeople = people.filter(person => true);
+  let foundPeople = people;
   
-  if(criteria.eyeColor !== undefined){
+  if(criteria.eyeColor !== undefined && criteria.eyeColor != ""){
     foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
   }
-  if(criteria.gender !== undefined){
+  if(criteria.gender !== undefined && criteria.gender != ""){
     foundPeople = foundPeople.filter(person => person.gender == criteria.gender);
   }
-  if(criteria.firstName !== undefined){
+  if(criteria.firstName !== undefined && criteria.firstName != ""){
     foundPeople = foundPeople.filter(person => person.firstName == criteria.firstName);
   }
-  if(criteria.lastName !== undefined){
+  if(criteria.lastName !== undefined && criteria.lastName != ""){
     foundPeople = foundPeople.filter(person => person.lastName == criteria.lastName);
   }
-  if(criteria.occupation !== undefined){
-    foundPeople = foundPeople.filter(person => person.occupation == criteria.occupation);
-  }
-  return foundPeople;
-}
-
-function searchByTraits(people, criteria){
-  let foundPeople = people.filter(person => true);
-  
-  if(criteria.eyeColor !== undefined || criteria.eyeColor != ""){
-    foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
-  }
-  if(criteria.gender !== undefined || criteria.gender != ""){
-    foundPeople = foundPeople.filter(person => person.gender == criteria.gender);
-  }
-  if(criteria.firstName !== undefined || criteria.firstName != ""){
-    foundPeople = foundPeople.filter(person => person.firstName == criteria.firstName);
-  }
-  if(criteria.lastName !== undefined || criteria.lastName != ""){
-    foundPeople = foundPeople.filter(person => person.lastName == criteria.lastName);
-  }
-  if(criteria.occupation !== undefined || criteria.occupation != ""){
+  if(criteria.occupation !== undefined && criteria.occupation != ""){
     foundPeople = foundPeople.filter(person => person.occupation == criteria.occupation);
   }
   return foundPeople;

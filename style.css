@@ -1,25 +1,3 @@
-#promptBG{
-	z-index: 2;
-	background-color: rgba(200, 200, 200, 200);
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	display: none;
-}
-
-#personPrompt *{
-	z-index: 3;
-	vertical-align: center;
-	position: absolute;
-	background-color: white;
-	text-align: center;
-	display: none;
-}
-
-#personPrompt input{
-
-}
-
 /* Main Body */
 body {
 	width: 90%;
