@@ -113,11 +113,12 @@ function searchByTraits(people, criteria){
 
 function searchPeople(){
   let searchObject = { 
-    firstName: capitalize(document.getElementById('firstName').value.toLowerCase()), 
-    eyeColor: document.getElementById('eyeColor').value,
-    occupation: document.getElementById('occupation').value,
+    firstName: capitalize(document.getElementById('firstName').value.toLowerCase()),
+    lastName: capitalize(document.getElementById('lastName').value.toLowerCase()),
+    eyeColor: document.getElementById('eyeColor').value.toLowerCase(),
+    occupation: document.getElementById('occupation').value.toLowerCase(),
     age: document.getElementById('age').value, 
-    gender: document.getElementById('gender').value};
+    gender: document.getElementById('gender').value.toLowerCase()};
 
   return searchByTraits(data, searchObject);
 }
