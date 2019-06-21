@@ -2,6 +2,7 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 // app is the function called to start the entire application
+addAge(data);
 
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -109,7 +110,7 @@ function searchByTraits(people, criteria){
 
 function enter(){
   let searchObject = {eyeColor: document.getElementById('eyeColor').value, 
-    gender: document.getElementById('gender').value };
+  gender: document.getElementById('gender').value, firstName: capitalize(document.getElementById("firstName").value.toLowerCase())};
   return searchByTraits(data, searchObject);
 }
 
@@ -124,16 +125,15 @@ function getDescendants1(people, person){
   }
   
   children.push(children.map(child => {
-    return getDescendants1( people, child );
+    return getDescendants1(people, child);
   }));
 
   return children;
 }
 
 function getChildren1(people, person){
-  return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
+  return people.filter(personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
 }
-
 
 // alerts a list of people
 function displayPeople(people){
@@ -154,16 +154,18 @@ function getPersonAge(dob) {
   return age;
 }
 
+function addAge(people){
+  for (let index = 0; index < people.length; index++) {
+    people[index].age = getPersonAge(people[index].dob);
+  }
+}
+
 // function that prompts and validates user input
 function promptFor(question, valid){  // "valid" is a callback!
   do{
     var response = prompt(question).trim();
   } while(!response || !valid(response));
   return response;
-}
-
-function promptForChecklist(){
-
 }
 
 // helper function to pass into promptFor to validate yes/no answers
