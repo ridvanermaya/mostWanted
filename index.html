@@ -19,7 +19,7 @@
           <h5 class="input-tag">First Name</h5>
         </div>
         <div class="col-6">
-          <input class="form-control" type="text" placeholder="First Name">
+          <input class="form-control" type="text" placeholder="First Name" id="firstName">
         </div>
       </div>
       <div class="row">
@@ -35,7 +35,7 @@
             <h5 class="input-tag">Gender</h5>
         </div>
         <div class="col-6">
-          <input class="form-conrol" type="text" placeholder="Gender">
+          <input class="form-conrol" type="text" placeholder="Gender" id="gender">
         </div>
       </div>
       <div class="row">
@@ -64,12 +64,12 @@
       </div>
       <div class="row">
         <div class="col-12 btn-find-people">
-            <input onclick="console.log(searchByTraits(data, {eyeColor: document.getElementById('eyeColor').value })); console.log(document.getElementById('eyeColor').innerHTML)" class="btn btn-lg btn-info" type="button" value="Search">
+            <input onclick="console.log(searchByTraits(data, {eyeColor: document.getElementById('eyeColor').value, gender: document.getElementById('gender').value })); console.log(document.getElementById('eyeColor').innerHTML)" class="btn btn-lg btn-info" type="button" value="Search">
         </div>
       </div>
     </div>
     <div class="card" style="width: 25rem;">
-        <img src="/images/randomimage.jpeg" class="card-img-top" alt="Person Image">
+        <img src="images/randomimage.jpeg" class="card-img-top" alt="Person Image">
         <div class="card-body">
           <h5 id="id_number" class="card-title">ID: </h5>
           <p id="full_name" class="card-text">Full Name: </p>
@@ -87,3 +87,6 @@
       </div>
   </body>
 </html>
+
+
+ firstName: document.getElementById('firstName').value
