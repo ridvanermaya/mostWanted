@@ -23,14 +23,13 @@
 /* Main Body */
 body {
 	width: 90%;
-	margin: auto;
-	margin-top: 10px;
+	margin: 10px auto;
 	text-align: center;
 }
 
 /*  */
 .container {
-	background-color: lightgray;
+	background-color: rgb(241, 241, 241);
 	border-radius: 10px;
 	width: auto;
 	margin-top: 10px;
@@ -52,4 +51,8 @@ body {
 
 .btn-find-people {
 	margin-bottom: 10px;
+}
+
+.card {
+	margin: auto;
 }

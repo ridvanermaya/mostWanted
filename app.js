@@ -2,12 +2,12 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 // app is the function called to start the entire application
+
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
     var foundPerson = searchByName(people);
-    console.log(foundPerson);
     displayPerson(foundPerson);
     
     break;
@@ -165,22 +165,6 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-  var personInfo = "First Name: " + person.firstName + "\n";
-  personInfo += "Last Name: " + person.lastName + "\n";
-  personInfo += "Gender: " + person.gender + "\n";
-  personInfo += "Date of Birth: " + person.dob + "\n";
-
-  personInfo += "Weight: " + person.weight + "    ";
-  personInfo += "Height: " + person.height + "    ";
-  personInfo += "Eye Clr." + person.eyeColor + "\n";
-
-  personInfo += "Occupation: " + person.occupation;
-  alert(personInfo);
-}
-
 function getPersonAge(dob) {
   let today = new Date();
   let birthDate = new Date(dob);
@@ -226,3 +210,27 @@ function getParents(people, person) {
   return parents;
 }
 
+function displayPerson(person){
+  let infoId = document.getElementById("id_number");
+  let infoFullName = document.getElementById("full_name");
+  let infoGender = document.getElementById("gender");
+  let infoDob = document.getElementById("dob");
+  let infoHeight = document.getElementById("height");
+  let infoWeight = document.getElementById("weight");
+  let infoEyeColor = document.getElementById("eye_color");
+  let infoOccupation = document.getElementById("occupation");
+  let infoParents = document.getElementById("parents");
+  let infoCurrentSpouse = document.getElementById("current_spouse");
+  // print all of the information about a person:
+  // height, weight, age, name, occupation, eye color.
+  infoId.innerHTML = "ID: " + person.id;
+  infoFullName.innerHTML = "Full Name: " + person.firstName + " " + person.lastName;
+  infoGender.innerHTML = "Gender: " + person.gender;
+  infoDob.innerHTML = "DOB: " + person.dob;
+  infoHeight.innerHTML = "Height: " + person.height;
+  infoWeight.innerHTML = "Weight: " + person.weight;
+  infoEyeColor.innerHTML = "Eye Color: " + person.eyeColor;
+  infoOccupation.innerHTML = "Occupation: " + person.occupation;
+  infoParents.innerHTML = "Parents: " + person.parents;
+  infoCurrentSpouse.innerHTML = "Current Spouse: " + person.currentSpouse;
+}

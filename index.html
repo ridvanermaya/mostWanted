@@ -10,16 +10,6 @@
   </head>
   <body>
     <button class="btn-lg btn-info" onclick="app(data)">Click to Start</button>
-    <div id='personPrompt'>
-    	<p>firstName <input id='firstName' type='text'/><br>
-    	lastName <input id='lastName' type='text'/><br>
-    	Age <input id='age' type='text'><br>
-    	Occupation <input id='occupation' type='text'/><br>
-    	Eye Color: <input id='eyeColor' type='text'><br>
-    	Date of Birth <input id='dob' type='text'/><br>
-    	</p>
-    	<input type='submit' value='Enter' onclick='findPeopleByCriteria()'/>
-    </div>
     <div class="container center">
       <div class="row">
         <h3 class="col-12">Search By Any Criterion or Multiple Criteria</h2>
@@ -78,8 +68,22 @@
         </div>
       </div>
     </div>
-    <div id='promptBG'>
-
-    </div>
+    <div class="card" style="width: 25rem;">
+        <img src="/images/randomimage.jpeg" class="card-img-top" alt="Person Image">
+        <div class="card-body">
+          <h5 id="id_number" class="card-title">ID: </h5>
+          <p id="full_name" class="card-text">Full Name: </p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li id="gender" class="list-group-item">Gender: </li>
+          <li id="dob" class="list-group-item">DOB: </li>
+          <li id="height" class="list-group-item">Height: </li>
+          <li id="weight" class="list-group-item">Weight: </li>
+          <li id="eye_color" class="list-group-item">Eye Color: </li>
+          <li id="occupation" class="list-group-item">Occupation: </li>
+          <li id="parents" class="list-group-item">Parents: </li>
+          <li id="current_spouse" class="list-group-item">Current Spouse: </li>
+        </ul>
+      </div>
   </body>
 </html>
