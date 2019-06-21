@@ -2,7 +2,9 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 // app is the function called to start the entire application
+
 addAge(data);
+
 
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
@@ -128,24 +130,24 @@ function searchPeople(){
 }
 
 // returns multidimensional array of children
-function getDescendants1(people, person){
+function getDescendants(people, person){
   let children = new Array();
 
-  children = getChildren1(people, person);
-
+  children = getChildren(people, person);
   if(children === undefined || children.length == 0){
     return;
   }
-  
+
   children.push(children.map(child => {
     return getDescendants1(people, child);
   }));
 
+
   return children;
 }
 
-function getChildren1(people, person){
-  return people.filter(personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
+function getChildren(people, person){
+  return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
 }
 
 // alerts a list of people
