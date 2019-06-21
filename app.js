@@ -2,7 +2,7 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 // app is the function called to start the entire application
-
+console.log(getDescendants1(data, findPersonById(data, 693243224)));
 function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
@@ -52,7 +52,6 @@ function mainMenu(person, people){
   }
 }
 
-
 function addDescriptiveData(){
   let people = data.map(function(person){ person.age = getAge(person); return person; });
 
@@ -91,9 +90,8 @@ function findPersonById(people, personId) {
   return foundPerson[0];
 }
 
-
 function searchByTraits(people, criteria){
-  let foundPeople = people.filter(person => true);
+  let foundPeople = people;
   
   if(criteria.eyeColor !== undefined && criteria.eyeColor != ""){
     foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
@@ -113,7 +111,6 @@ function searchByTraits(people, criteria){
   return foundPeople;
 }
 
-
 function enter(){
   let searchObject = { 
     firstName: capitalize(document.getElementById('firstName').value.toLowerCase()), 
@@ -129,7 +126,7 @@ function getDescendants1(people, person){
   children = getChildren1(people, person);
 
   if(children === undefined || children.length == 0){
-    return undefined;
+    return;
   }
   
   children.push(children.map(child => {
