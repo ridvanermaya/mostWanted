@@ -54,8 +54,8 @@ function mainMenu(person, people){
 }
 
 function searchByName(people){
-  var firstName = promptFor("What is the person's first name?", chars);
-  var lastName = promptFor("What is the person's last name?", chars);
+  var firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+  var lastName = promptFor("What is the person's last name?", chars).toLowerCase();
 
   var foundPerson = people.filter(person => person.lastName == lastName && person.firstName == firstName);
   return foundPerson[0];
