@@ -61,6 +61,10 @@ function addDescriptiveData(){
 
 function capitalize(s){
   let capitalized = String.fromCharCode(s.charCodeAt(0)-32);
+
+  if(s === undefined || s == "")
+    return undefined;
+  
   for(let i=1; i<s.length; i++){
     if(s[i] == " " && s.charCodeAt(i+1) > 96 && s.charCodeAt(i+1) < 123){
       capitalized += " " + String.fromCharCode(s.charCodeAt(i+1)-32);
@@ -111,8 +115,10 @@ function searchByTraits(people, criteria){
 
 
 function enter(){
-  let searchObject = {eyeColor: document.getElementById('eyeColor').value, 
-    gender: document.getElementById('gender').value };
+  let searchObject = { 
+    firstName: capitalize(document.getElementById('firstName').value.toLowerCase()), 
+    eyeColor: document.getElementById('eyeColor').value, 
+    gender: document.getElementById('gender').value};
   return searchByTraits(data, searchObject);
 }
 
