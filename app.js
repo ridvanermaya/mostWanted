@@ -87,6 +87,8 @@ function findPersonById(people, personId) {
   return foundPerson[0];
 }
 
+
+console.log(searchByTraits(data, {eyeColor: "brown", gender: "female"}));
 function searchByTraits(people, criteria){
   let foundPeople = people.filter(person => true);
   
@@ -136,9 +138,16 @@ function displayPerson(person){
   alert(personInfo);
 }
 
-function getAge(person){
-  let dob = person.dob;
-  return dob;
+function getPersonAge(dob) {
+  let today = new Date();
+  let birthDate = new Date(dob);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  let month = today.getMonth() - birthDate.getMonth();
+
+  if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+    age = age - 1;
+  }
+  return age;
 }
 
 // function that prompts and validates user input
@@ -149,7 +158,6 @@ function promptFor(question, valid){  // "valid" is a callback!
   return response;
 }
 
-
 function promptForChecklist(){
 
 }
@@ -158,7 +166,6 @@ function promptForChecklist(){
 function yesNo(input){
   return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
 }
-
 
 // helper function to pass in as default promptFor validation
 function chars(input){
