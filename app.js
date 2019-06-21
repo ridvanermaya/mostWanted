@@ -109,9 +109,12 @@ function searchByTraits(people, criteria){
 }
 
 
-function enter(){
-  let searchObject = {eyeColor: document.getElementById('eyeColor').value, 
-    gender: document.getElementById('gender').value };
+function searchPeople(){
+  let searchObject = {eyeColor: document.getElementById('eyeColor').value, gender: document.getElementById('gender').value, occupation: document.getElementById('occupation').value, age: document.getElementById('age').value, firstName: capitalize(document.getElementById('firstName').value.toLowerCase())};
+  // searchObject.firstName = capitalize(document.getElementById('firstName').value.toLowerCase());
+
+  // let searchObject = {firstName: capitalize(document.getElementById('firstName').value.toLowerCase())};
+  // age: document.getElementById('age').value
   return searchByTraits(data, searchObject);
 }
 
