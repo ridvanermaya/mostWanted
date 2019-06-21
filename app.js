@@ -89,7 +89,7 @@ function findPersonById(people, personId) {
 
 
 console.log(searchByTraits(data, {eyeColor: "brown", gender: "female"}));
-console.log(getDescendants1(data, findPersonById(data, 464142841)));
+console.log(getDescendants1(data, findPersonById(data, 693243224)));
 
 function searchByTraits(people, criteria){
   let foundPeople = people.filter(person => true);
@@ -114,21 +114,23 @@ function searchByTraits(people, criteria){
 
 // returns multidimensional array of children
 function getDescendants1(people, person){
-  //first genration
-  return getChildren1( people, person );
-  /*
-  if(children != null){
-    try{
-      //nth generation
-      children.push(children.filter(child => getChildren(child)));
-    } catch( ... ){
-      return null;
-    }
-  }*/
+  let children = new Array();
+
+  children = getChildren1(people, person);
+
+  if(children === undefined || children.length == 0){
+    return undefined;
+  }
+  
+  children.push(children.map(child => {
+    return getDescendants1( people, child );
+  }));
+
+  return children;
 }
 
 function getChildren1(people, person){
-  return people.filter( personSearch => personSearch.parents[0] == person.id || personSearch.parents[1] == person.id);
+  return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
 }
 
 
