@@ -52,7 +52,6 @@ function mainMenu(person, people){
   }
 }
 
-
 function addDescriptiveData(){
   let people = data.map(function(person){ person.age = getAge(person); return person; });
 
@@ -88,7 +87,7 @@ function findPersonById(people, personId) {
 }
 
 function searchByTraits(people, criteria){
-  let foundPeople = people.filter(person => true);
+  let foundPeople = people;
   
   if(criteria.eyeColor !== undefined && criteria.eyeColor != ""){
     foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
@@ -108,13 +107,13 @@ function searchByTraits(people, criteria){
   return foundPeople;
 }
 
-
 function searchPeople(){
   let searchObject = {eyeColor: document.getElementById('eyeColor').value, gender: document.getElementById('gender').value, occupation: document.getElementById('occupation').value, age: document.getElementById('age').value, firstName: capitalize(document.getElementById('firstName').value.toLowerCase())};
   // searchObject.firstName = capitalize(document.getElementById('firstName').value.toLowerCase());
 
   // let searchObject = {firstName: capitalize(document.getElementById('firstName').value.toLowerCase())};
   // age: document.getElementById('age').value
+
   return searchByTraits(data, searchObject);
 }
 
