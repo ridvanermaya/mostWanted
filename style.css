@@ -7,7 +7,7 @@
 	display: none;
 }
 
-#personPrompt{
+#personPrompt *{
 	z-index: 3;
 	vertical-align: center;
 	position: absolute;

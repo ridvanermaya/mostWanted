@@ -6,14 +6,13 @@ function app(people){
   var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
   switch(searchType){
     case 'yes':
-    // TODO: search by name
     var foundPerson = searchByName(people);
     console.log(foundPerson);
     displayPerson(foundPerson);
     
     break;
     case 'no':
-    // TODO: search by traits
+      
     break;
     default:
     app(people); // restart app
@@ -53,9 +52,35 @@ function mainMenu(person, people){
   }
 }
 
+
+function addDescriptiveData(){
+  let people = data.map(function(person){ person.age = getAge(person); return person; });
+
+  return people;
+}
+
+function capitalize(s){
+  let capitalized = String.fromCharCode(s.charCodeAt(0)-32);
+  for(let i=1; i<s.length; i++){
+    if(s[i] == " " && s.charCodeAt(i+1) > 96 && s.charCodeAt(i+1) < 123){
+      capitalized += " " + String.fromCharCode(s.charCodeAt(i+1)-32);
+      ++i;
+    } else{
+      capitalized += s[i];
+    }
+  }
+
+  return capitalized;
+}
+
 function searchByName(people){
+<<<<<<< HEAD
   var firstName = promptFor("What is the person's first name?", chars).toLowerCase();
   var lastName = promptFor("What is the person's last name?", chars).toLowerCase();
+=======
+  var firstName = capitalize(promptFor("What is the person's first name?", chars).toLowerCase());
+  var lastName = capitalize(promptFor("What is the person's last name?", chars).toLowerCase());
+>>>>>>> 7d7a520a874a87af7b1658f080b0092039c971f9
 
   var foundPerson = people.filter(person => person.lastName == lastName && person.firstName == firstName);
   return foundPerson[0];
@@ -67,8 +92,11 @@ function findPersonById(people, personId) {
   return foundPerson[0];
 }
 
-function findPeopleByCriteria(people, criteria){
+
+console.log(searchByTraits(data, {eyeColor: "brown", gender: "female"}));
+function searchByTraits(people, criteria){
   let foundPeople = people.filter(person => true);
+  
   if(criteria.eyeColor !== undefined){
     foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
   }
@@ -86,6 +114,11 @@ function findPeopleByCriteria(people, criteria){
   }
   return foundPeople;
 }
+
+function getDescendants(){
+
+}
+
 
 // alerts a list of people
 function displayPeople(people){
@@ -154,3 +187,4 @@ function getParents(people, person) {
   let parents = people.filter(person => person.id === getParentIds[0] || person.id === getParentIds[1]);
   return parents;
 }
+
