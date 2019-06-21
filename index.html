@@ -45,7 +45,7 @@
             <h5 class="input-tag">Gender</h5>
         </div>
         <div class="col-6">
-          <input class="form-control" type="text" placeholder="Gender">
+          <input class="form-conrol" type="text" placeholder="Gender">
         </div>
       </div>
       <div class="row">
@@ -53,7 +53,7 @@
             <h5 class="input-tag">Eye Color</h5>
         </div>
         <div class="col-6">
-          <input class="form-control" type="text" placeholder="Eye Color">
+          <input class="form-control" type="text" placeholder="Eye Color" id="eyeColor">
         </div>
       </div>
       <div class="row">
@@ -74,7 +74,7 @@
       </div>
       <div class="row">
         <div class="col-12 btn-find-people">
-            <input onclick="findPeopleByCriteria()" class="btn btn-lg btn-info" type="button" value="Search">
+            <input onclick="console.log(searchByTraits(data, {eyeColor: document.getElementById('eyeColor').value })); console.log(document.getElementById('eyeColor').innerHTML)" class="btn btn-lg btn-info" type="button" value="Search">
         </div>
       </div>
     </div>

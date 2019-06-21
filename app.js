@@ -74,13 +74,8 @@ function capitalize(s){
 }
 
 function searchByName(people){
-<<<<<<< HEAD
-  var firstName = promptFor("What is the person's first name?", chars).toLowerCase();
-  var lastName = promptFor("What is the person's last name?", chars).toLowerCase();
-=======
   var firstName = capitalize(promptFor("What is the person's first name?", chars).toLowerCase());
   var lastName = capitalize(promptFor("What is the person's last name?", chars).toLowerCase());
->>>>>>> 7d7a520a874a87af7b1658f080b0092039c971f9
 
   var foundPerson = people.filter(person => person.lastName == lastName && person.firstName == firstName);
   return foundPerson[0];
@@ -95,6 +90,30 @@ function findPersonById(people, personId) {
 
 console.log(searchByTraits(data, {eyeColor: "brown", gender: "female"}));
 console.log(getDescendants1(data, findPersonById(data, 693243224)));
+
+// let findPeopleByTraits = document.getElementById("findPeopleByTraits"); //My own testing, delete if doesn't work.
+// // document.getElementById("findPeopleByTraits").addEventListener("click", searchByTraits);
+
+function searchByTraits(people, criteria){
+  let foundPeople = people.filter(person => true);
+  
+  if(criteria.eyeColor !== undefined){
+    foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
+  }
+  if(criteria.gender !== undefined){
+    foundPeople = foundPeople.filter(person => person.gender == criteria.gender);
+  }
+  if(criteria.firstName !== undefined){
+    foundPeople = foundPeople.filter(person => person.firstName == criteria.firstName);
+  }
+  if(criteria.lastName !== undefined){
+    foundPeople = foundPeople.filter(person => person.lastName == criteria.lastName);
+  }
+  if(criteria.occupation !== undefined){
+    foundPeople = foundPeople.filter(person => person.occupation == criteria.occupation);
+  }
+  return foundPeople;
+}
 
 function searchByTraits(people, criteria){
   let foundPeople = people.filter(person => true);
