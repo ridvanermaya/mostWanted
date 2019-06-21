@@ -87,9 +87,8 @@ function findPersonById(people, personId) {
   return foundPerson[0];
 }
 
-
-console.log(searchByTraits(data, {eyeColor: "brown", gender: "female"}));
-console.log(getDescendants1(data, findPersonById(data, 693243224)));
+// console.log(searchByTraits(data, {eyeColor: "brown", gender: "female"}));
+// console.log(getDescendants1(data, findPersonById(data, 693243224)));
 
 function searchByTraits(people, criteria){
   let foundPeople = people.filter(person => true);
@@ -187,16 +186,16 @@ function getParents(people, person) {
 }
 
 function displayPerson(person){
-  let infoId = document.getElementById("id_number");
-  let infoFullName = document.getElementById("full_name");
-  let infoGender = document.getElementById("gender");
-  let infoDob = document.getElementById("dob");
-  let infoHeight = document.getElementById("height");
-  let infoWeight = document.getElementById("weight");
-  let infoEyeColor = document.getElementById("eye_color");
-  let infoOccupation = document.getElementById("occupation");
-  let infoParents = document.getElementById("parents");
-  let infoCurrentSpouse = document.getElementById("current_spouse");
+  let infoId = document.getElementsByClassName("id-number")[0];
+  let infoFullName = document.getElementsByClassName("full-name")[0];
+  let infoGender = document.getElementsByClassName("gender")[0];
+  let infoDob = document.getElementsByClassName("dob")[0];
+  let infoHeight = document.getElementsByClassName("height")[0];
+  let infoWeight = document.getElementsByClassName("weight")[0];
+  let infoEyeColor = document.getElementsByClassName("eye-color")[0];
+  let infoOccupation = document.getElementsByClassName("occupation")[0];
+  let infoParents = document.getElementsByClassName("parents")[0];
+  let infoCurrentSpouse = document.getElementsByClassName("current-spouse")[0];
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   infoId.innerHTML = "ID: " + person.id;
