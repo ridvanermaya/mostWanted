@@ -88,12 +88,6 @@ function findPersonById(people, personId) {
 }
 
 
-console.log(searchByTraits(data, {eyeColor: "brown", gender: "female"}));
-console.log(getDescendants1(data, findPersonById(data, 693243224)));
-
-// let findPeopleByTraits = document.getElementById("findPeopleByTraits"); //My own testing, delete if doesn't work.
-// // document.getElementById("findPeopleByTraits").addEventListener("click", searchByTraits);
-
 function searchByTraits(people, criteria){
   let foundPeople = people.filter(person => true);
   
@@ -118,19 +112,19 @@ function searchByTraits(people, criteria){
 function searchByTraits(people, criteria){
   let foundPeople = people.filter(person => true);
   
-  if(criteria.eyeColor !== undefined){
+  if(criteria.eyeColor !== undefined || criteria.eyeColor != ""){
     foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
   }
-  if(criteria.gender !== undefined){
+  if(criteria.gender !== undefined || criteria.gender != ""){
     foundPeople = foundPeople.filter(person => person.gender == criteria.gender);
   }
-  if(criteria.firstName !== undefined){
+  if(criteria.firstName !== undefined || criteria.firstName != ""){
     foundPeople = foundPeople.filter(person => person.firstName == criteria.firstName);
   }
-  if(criteria.lastName !== undefined){
+  if(criteria.lastName !== undefined || criteria.lastName != ""){
     foundPeople = foundPeople.filter(person => person.lastName == criteria.lastName);
   }
-  if(criteria.occupation !== undefined){
+  if(criteria.occupation !== undefined || criteria.occupation != ""){
     foundPeople = foundPeople.filter(person => person.occupation == criteria.occupation);
   }
   return foundPeople;
@@ -211,16 +205,16 @@ function getParents(people, person) {
 }
 
 function displayPerson(person){
-  let infoId = document.getElementById("id_number");
-  let infoFullName = document.getElementById("full_name");
-  let infoGender = document.getElementById("gender");
-  let infoDob = document.getElementById("dob");
-  let infoHeight = document.getElementById("height");
-  let infoWeight = document.getElementById("weight");
-  let infoEyeColor = document.getElementById("eye_color");
-  let infoOccupation = document.getElementById("occupation");
-  let infoParents = document.getElementById("parents");
-  let infoCurrentSpouse = document.getElementById("current_spouse");
+  let infoId = document.getElementsByClassName("id-number")[0];
+  let infoFullName = document.getElementsByClassName("full-name")[0];
+  let infoGender = document.getElementsByClassName("gender")[0];
+  let infoDob = document.getElementsByClassName("dob")[0];
+  let infoHeight = document.getElementsByClassName("height")[0];
+  let infoWeight = document.getElementsByClassName("weight")[0];
+  let infoEyeColor = document.getElementsByClassName("eye-color")[0];
+  let infoOccupation = document.getElementsByClassName("occupation")[0];
+  let infoParents = document.getElementsByClassName("parents")[0];
+  let infoCurrentSpouse = document.getElementsByClassName("current-spouse")[0];
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   infoId.innerHTML = "ID: " + person.id;
