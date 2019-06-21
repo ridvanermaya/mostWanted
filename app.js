@@ -108,6 +108,13 @@ function searchByTraits(people, criteria){
   return foundPeople;
 }
 
+
+function enter(){
+  let searchObject = {eyeColor: document.getElementById('eyeColor').value, 
+    gender: document.getElementById('gender').value };
+  return searchByTraits(data, searchObject);
+}
+
 // returns multidimensional array of children
 function getDescendants1(people, person){
   let children = new Array();
