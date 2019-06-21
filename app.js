@@ -109,6 +109,9 @@ function searchByTraits(people, criteria){
   if(criteria.occupation !== undefined && criteria.occupation != ""){
     foundPeople = foundPeople.filter(person => person.occupation == criteria.occupation);
   }
+  if(criteria.age !== undefined && criteria.age !== ""){
+    foundPeople = foundPeople.filter(person => person.age == criteria.age);
+  }
   return foundPeople;
 }
 
