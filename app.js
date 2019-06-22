@@ -137,7 +137,7 @@ function getDescendants(people, person){
   }
 
   children.push(children.map(child => {
-    return getDescendants1(people, child);
+    return getDescendants(people, child);
   }));
 
 
