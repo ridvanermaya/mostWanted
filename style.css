@@ -37,8 +37,19 @@ body {
 
 #display-people {
 	display: flex;
+	flex-wrap: wrap;
+	width: auto;
+	margin: auto;
+}
+
+.displayPerson {
+	margin-bottom: 10px;
 }
 
 .hidden {
 	display: none;
+}
+
+.btn {
+	margin-bottom: 10px;
 }
