@@ -235,13 +235,12 @@ function displayPerson(person){
   infoCurrentSpouse.innerHTML = "Current Spouse: " + person.currentSpouse;
 } */
 
-function displayPerson(person){
+function displayPeople(people){
   var personRef = document.getElementById("personRef");
   let displayPeople = document.getElementById("peopleDisplay");
   displayPeople.innerHTML += personRef.innerHTML;
-  //personRef.innerHTML += personRef.innerHTML; 
 }
 
 
 console.log(getDescendants(data, data[8]));
-displayPerson(findPersonById(data, 629807187));
+displayPeople(findPersonById(data, 629807187));
