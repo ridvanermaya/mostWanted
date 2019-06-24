@@ -4,9 +4,6 @@
     <meta charset="utf-8">
     <title>Most Wanted</title>
 
-    <script src="data.js"></script>
-    <script src="app.js"></script>
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -70,23 +67,35 @@
         </div>
       </div>
     </div>
-    <div class="card" style="width: 25rem;">
-        <img src="images/randomimage.jpeg" class="card-img-top" alt="Person Image">
-        <div class="card-body">
-          <h5 class="card-title id-number">ID: </h5>
-          <p class="card-text full-name">Full Name: </p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item gender">Gender: </li>
-          <li class="list-group-item dob">DOB: </li>
-          <li class="list-group-item height">Height: </li>
-          <li class="list-group-item weight">Weight: </li>
-          <li class="list-group-item eye-color">Eye Color: </li>
-          <li class="list-group-item occupation">Occupation: </li>
-          <li class="list-group-item parents">Parents: </li>
-          <li class="list-group-item current-spouse">Current Spouse: </li>
-        </ul>
+
+    <div id="peopleDisplay">
+
+    </div>
+
+    <div id="personRef">
+      <div class="card" style="width: 25rem;">
+          <img src="images/randomimage.jpeg" class="card-img-top" alt="Person Image">
+          <div class="card-body">
+            <h5 class="card-title id-number">ID: </h5>
+            <p class="card-text full-name">Full Name: </p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item gender">Gender: </li>
+            <li class="list-group-item dob">DOB: </li>
+            <li class="list-group-item height">Height: </li>
+            <li class="list-group-item weight">Weight: </li>
+            <li class="list-group-item eye-color">Eye Color: </li>
+            <li class="list-group-item occupation">Occupation: </li>
+            <li class="list-group-item parents">Parents: </li>
+            <li class="list-group-item current-spouse">Current Spouse: </li>
+          </ul>
       </div>
+    </div>
   </body>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
 </html>
 
+
+
+    
