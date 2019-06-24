@@ -128,17 +128,20 @@ function searchPeople(){
 }
 
 // returns multidimensional array of children
-function getDescendants(people, person){
+function getDescendants(people, person) {
   let children = new Array();
 
   children = getChildren(people, person);
-  if(children === undefined || children.length == 0){
-    return;
+  if (children === undefined || children.length == 0) {
+    return children;
   }
 
-  children.push(children.map(child => {
-    return getDescendants1(people, child);
-  }));
+  children.map(child => {
+    let descendants = getDescendants(people, child);
+    if (descendants.length > 0) children.push(descendants);
+  });
+  return children;
+}
 
 
   return children;
