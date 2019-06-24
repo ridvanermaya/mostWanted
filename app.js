@@ -227,6 +227,7 @@ function getParents(people, person) {
 
 function displayPerson(person){
   printDisplayDiv();
+  let infoImage = document.getElementsByClassName("displayPerson")[displayPersonIndex].getElementsByTagName("img")[0];
   let infoId = document.getElementsByClassName("id-number")[displayPersonIndex];
   let infoFullName = document.getElementsByClassName("full-name")[displayPersonIndex];
   let infoGender = document.getElementsByClassName("gender")[displayPersonIndex];
@@ -239,6 +240,11 @@ function displayPerson(person){
   let infoCurrentSpouse = document.getElementsByClassName("current-spouse")[displayPersonIndex];
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
+  if(person.gender == "male"){
+    infoImage.src = "images/men/" + person.id + ".jpg";
+  } else if(person.gender == "women"){
+    infoImage.src = "images/women/" + person.id + ".jpg";
+  }
   infoId.innerHTML = "ID: " + person.id;
   infoFullName.innerHTML = "Full Name: " + person.firstName + " " + person.lastName;
   infoGender.innerHTML = "Gender: " + person.gender;
