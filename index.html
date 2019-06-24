@@ -3,15 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Most Wanted</title>
-
-    <script src="data.js"></script>
-    <script src="app.js"></script>
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <button class="btn-lg btn-info" onclick="app(data)">Click to Start</button>
     <div class="container center">
       <div class="row">
         <h3 class="col-12">Search By Any Criterion or Multiple Criteria</h2>
@@ -66,11 +61,15 @@
       </div>
       <div class="row">
         <div class="col-12 btn-find-people">
-            <input onclick="console.log(searchPeople())" class="btn btn-lg btn-info" type="button" value="Search">
+            <input onclick="displayPeople(searchPeople())" class="btn btn-lg btn-info" type="button" value="Search">
         </div>
       </div>
     </div>
-    <div class="card" style="width: 25rem;">
+    <div id="display-people">
+
+    </div>
+    <div id="display-ref">
+      <div class="displayPerson card hidden" style="width: 25rem;">
         <img src="images/randomimage.jpeg" class="card-img-top" alt="Person Image">
         <div class="card-body">
           <h5 class="card-title id-number">ID: </h5>
@@ -87,6 +86,9 @@
           <li class="list-group-item current-spouse">Current Spouse: </li>
         </ul>
       </div>
+    </div>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
 
