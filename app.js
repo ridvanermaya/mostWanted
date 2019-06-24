@@ -109,7 +109,7 @@ function getDescendants(people, person) {
   return children;
 }
 
-
+console.log(getDescendants(data, data[8]));
 function getChildren(people, person){
   return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
 }
@@ -257,7 +257,7 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   if(person.gender == "male"){
     infoImage.src = "images/men/" + person.id + ".jpg";
-  } else if(person.gender == "women"){
+  } else if(person.gender == "female"){
     infoImage.src = "images/women/" + person.id + ".jpg";
   }
   infoId.innerHTML = "ID: " + person.id;
