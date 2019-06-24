@@ -80,20 +80,35 @@ function searchPeople(){
 }
 
 // returns multidimensional array of children
+//These functions check for ancestors
 function getDescendants(people, person) {
-  let children = new Array();
+  let children = new Array(Array());
 
-  children = getChildren(people, person);
-  if (children === undefined || children.length == 0) {
-    return children;
+  children[0] = getChildren(people, person);
+
+
+  if (children[0] === undefined || children[0].length == 0) {
+    return children[0];
   }
 
-  children.map(child => {
+  children[0].map(child => {
     let descendants = getDescendants(people, child);
-    if (descendants.length > 0) children.push(descendants);
+    if (descendants.length > 0){
+      try{
+        if(descendants[0].length > 0){
+          for(let i=0; i<descendants.length; i++){
+            children.push(descendants[i]);
+          }
+        }
+      } catch( e ){
+        children.push(descendants);
+      }
+    }
   });
+
   return children;
 }
+
 
 function getChildren(people, person){
   return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
