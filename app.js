@@ -115,18 +115,27 @@ function getChildren(people, person){
 
 //These functions check for ancestors
 function getAncestors(people, person) {
-  let lineage = new Array();
+  let lineage = new Array(Array());
 
-  lineage = findAncestors(people, person);
-  if (lineage === undefined || lineage.length == 0) {
-    return lineage;
+  lineage[0] = findAncestors(people, person);
+
+  if (lineage[0] === undefined || lineage[0].length == 0) {
+    return lineage[0];
   }
 
-    lineage.map(parent => {
+  lineage[0].map(parent => {
     let ancestors = getAncestors(people, parent);
+    if (ancestors.length > 0){
+      try{
+        if(ancestors[0].length > 0){
           for(let i=0; i<ancestors.length; i++){
-            lineage.push(ancestors[i])
+            lineage.push(ancestors[i]);
           }
+        }
+      } catch( e ){
+        lineage.push(ancestors);
+      }
+    }
   });
 
   return lineage;
@@ -136,7 +145,7 @@ function findAncestors(people, person){
   return people.filter( personSearch => personSearch.id === person.parents[0] || personSearch.id === person.parents[1]);
 }
 
-console.log(getAncestors(data, data[22]));
+console.log(getAncestors(data, data[21]));
 
 // These functions check to see if any people share parents
 // Create a function that will serve to find siblings of person searched
