@@ -3,6 +3,7 @@ body {
 	width: 90%;
 	margin: 10px auto;
 	text-align: center;
+	font-family: 'Roboto Mono', monospace;
 }
 
 /* Display Person/People  */
@@ -10,8 +11,12 @@ body {
 	background-color: rgb(241, 241, 241);
 	border-radius: 10px;
 	width: auto;
-	margin-top: 10px;
+	margin-top: 20px;
 	text-align: center;
+}
+
+.col-12 {
+	margin: 20px auto;
 }
 
 .row {
@@ -21,6 +26,7 @@ body {
 
 .input-tag {
 	text-align: right;
+	padding-top: 5px;
 }
 
 .form-control {

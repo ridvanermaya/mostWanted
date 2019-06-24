@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Most Wanted</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -61,7 +62,7 @@
       </div>
       <div class="row">
         <div class="col-12 btn-find-people">
-            <input onclick="displayPeople(searchPeople())" class="btn btn-lg btn-info" type="button" value="Search">
+            <input onclick="clearDiv(); displayPeople(searchPeople())" class="btn btn-lg btn-info" type="button" value="Search">
         </div>
       </div>
     </div>
@@ -75,9 +76,9 @@
         <div class="card-body">
           <h5 class="card-title id-number">ID: </h5>
           <p class="card-text full-name">Full Name: </p>
-          <input onclick="#" type="button" class="btn btn-lg btn-info" value="Get Descendants">
-          <input onclick="#" type="button" class="btn btn-lg btn-info" value="Get Ancestors">
-          <input onclick="#" type="button" class="btn btn-lg btn-info" value="Get Immediate Family Members">
+          <input type="button" class="btn btn-lg btn-info get-descendants-btn" value="Get Descendants">
+          <input type="button" class="btn btn-lg btn-info" value="Get Ancestors">
+          <input type="button" class="btn btn-lg btn-info display-immediate-family-members-btn" value="Get Immediate Family Members">
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item gender">Gender: </li>
