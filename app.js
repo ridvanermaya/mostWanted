@@ -150,6 +150,17 @@ function getChildren(people, person){
   return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
 }
 
+function getSiblings(people, person) {
+  let sibilings = new Array();
+
+  siblings = findSiblings
+}
+
+
+function fingSiblings(people, person) {
+  
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
