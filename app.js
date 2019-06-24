@@ -45,7 +45,8 @@ function findPersonById(people, personId) {
 
 function searchByTraits(people, criteria){
   let foundPeople = people;
-  
+  if((criteria.gender === undefined || criteria.gender === "") && (criteria.eyeColor == undefined || criteria.eyeColor === "") && (criteria.firstName == undefined || criteria.fir && criteria.lastName === undefined && criteria.occupation === undefined && criteria.age === undefined){
+  }
   if(criteria.eyeColor !== undefined && criteria.eyeColor != ""){
     foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
   }
@@ -292,8 +293,19 @@ function displayPerson(person){
     //loopa threw every generation
     for(let index = 0; index < descendants.length; index++ ){
       //loop through every child in generation
-      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Generation " + (index + 1) + "</h1>";
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'>Generation " + (index + 1) + "</h1>";
       displayPeople(descendants[index]);
+    }
+  }
+  getAncestorsBtn.onclick = function(){
+    clearDiv();
+    let ancestors = getAncestors(data, person);
+    if(ancestors.length === 0){
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'>No Ancestors Found!</h1>";
+    }
+    for (let index = 0; index < ancestors.length; index++) {
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'>Ancestors Generation " + (index + 1) + "</h1>";
+      displayPeople(ancestors[index]);
     }
   }
   displayImmediateFamilyMembersBtn.onclick = function(){
