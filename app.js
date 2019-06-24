@@ -127,19 +127,32 @@ function searchPeople(){
   return searchByTraits(data, searchObject);
 }
 
-// returns multidimensional array of children
-function getDescendants(people, person) {
-  let children = new Array();
 
-  children = getChildren(people, person);
-  if (children === undefined || children.length == 0) {
-    return children;
+// returns multidimensional array of descending generations
+function getDescendants(people, person) {
+  let children = new Array(Array());
+
+  children[0] = getChildren(people, person);
+
+  if (children[0] === undefined || children[0].length == 0) {
+    return children[0];
   }
 
-  children.map(child => {
+  children[0].map(child => {
     let descendants = getDescendants(people, child);
-    if (descendants.length > 0) children.push(descendants);
+    if (descendants.length > 0){
+      try{
+        if(descendants[0].length > 0){
+          for(let i=0; i<descendants.length; i++){
+            children.push(descendants[i])
+          }
+        }
+      } catch( e ){
+        children.push(descendants);
+      }
+    }
   });
+
   return children;
 }
 
@@ -214,17 +227,13 @@ function chars(input){
   return true; // default validation only
 }
 
-function findPersonById(people, personId) {
-  let foundPerson = people.filter(person => person.id === personId);
-  return foundPerson[0];
-}
 
 function getParents(people, person) {
   let getParentIds = person.parents;
   let parents = people.filter(person => person.id === getParentIds[0] || person.id === getParentIds[1]);
   return parents;
 }
-
+/*
 function displayPerson(person){
   let infoId = document.getElementsByClassName("id-number")[0];
   let infoFullName = document.getElementsByClassName("full-name")[0];
@@ -248,4 +257,15 @@ function displayPerson(person){
   infoOccupation.innerHTML = "Occupation: " + person.occupation;
   infoParents.innerHTML = "Parents: " + person.parents;
   infoCurrentSpouse.innerHTML = "Current Spouse: " + person.currentSpouse;
+} */
+
+function displayPerson(person){
+  var personRef = document.getElementById("personRef");
+  let displayPeople = document.getElementById("peopleDisplay");
+  displayPeople.innerHTML += personRef.innerHTML;
+  //personRef.innerHTML += personRef.innerHTML; 
 }
+
+
+console.log(getDescendants(data, data[8]));
+displayPerson(findPersonById(data, 629807187));
