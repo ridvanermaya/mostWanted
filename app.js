@@ -147,16 +147,29 @@ function getChildren(people, person){
   return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
 }
 
+// console.log(getDescendants(data, data[8]));
+
+// These functions checks to see if any people share parents
+// Create a function that will serve to find siblings of person searched
+// Create a new array that will display anyone that shares a parent with person searched
+// test index 16 - 19
 function getSiblings(people, person) {
-  let sibilings = new Array();
+  let siblings = new Array();
 
-  siblings = findSiblings
+  siblings = findSiblings(people, person);
+  if (siblings === undefined || siblings.length == 0) {
+    return siblings;
+  }
+  return siblings;
+} //end of function
+
+function findSiblings(people, person){
+  let siblingsIncludingPerson = people.filter(personSearch => personSearch.parents[0] === person.parents[0] || personSearch.parents[1] === person.parents[1]);
+  let siblingsWithoutPerson = siblingsIncludingPerson.filter(personSearch => personSearch.id != person.id); 
+  return siblingsWithoutPerson;
 }
 
-
-function fingSiblings(people, person) {
-  
-}
+console.log(getSiblings(data, data[16]));
 
 // alerts a list of people
 function displayPeople(people){
