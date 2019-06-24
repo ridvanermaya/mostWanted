@@ -2,56 +2,8 @@
 Build all of your functions for displaying and gathering information below (GUI).
 */
 // app is the function called to start the entire application
+let displayPersonIndex = 0;
 addAge(data);
-
-function app(people){
-  var searchType = promptFor("Do you know the name of the person you are looking for? Enter 'yes' or 'no'", yesNo).toLowerCase();
-  switch(searchType){
-    case 'yes':
-    var foundPerson = searchByName(people);
-    displayPerson(foundPerson);
-    
-    break;
-    case 'no':
-      
-    break;
-    default:
-    app(people); // restart app
-    break;
-  }
-}
-
-// Menu function to call once you find who you are looking for
-function mainMenu(person, people){
-
-  /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
-
-  if(!person){
-    alert("Could not find that individual.");
-    return app(people); // restart
-  }
-
-  var displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
-
-  switch(displayOption){
-    case "info":
-    // TODO: get person's info
-    break;
-    case "family":
-    // TODO: get person's family
-    break;
-    case "descendants":
-    // TODO: get person's descendants
-    break;
-    case "restart":
-    app(people); // restart
-    break;
-    case "quit":
-    return; // stop execution
-    default:
-    return mainMenu(person, people); // ask again
-  }
-}
 
 function addDescriptiveData(){
   let people = data.map(function(person){ person.age = getAge(person); return person; });
@@ -127,24 +79,42 @@ function searchPeople(){
   return searchByTraits(data, searchObject);
 }
 
-
-// returns multidimensional array of descending generations
+// returns multidimensional array of children
 function getDescendants(people, person) {
-  let children = new Array(Array());
+  let children = new Array();
 
-  children[0] = getChildren(people, person);
-
-  if (children[0] === undefined || children[0].length == 0) {
-    return children[0];
+  children = getChildren(people, person);
+  if (children === undefined || children.length == 0) {
+    return children;
   }
 
-  children[0].map(child => {
+  children.map(child => {
     let descendants = getDescendants(people, child);
-    if (descendants.length > 0){
+    if (descendants.length > 0) children.push(descendants);
+  });
+  return children;
+}
+
+function getChildren(people, person){
+  return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
+}
+
+//These functions check for ancestors
+function getAncestors(people, person) {
+  let lineage = new Array();
+
+  lineage = findAncestors(people, person);
+  if (lineage === undefined || lineage.length == 0) {
+    return lineage;
+  }
+
+  lineage.map(parent => {
+    let ancestors = getAncestors(people, parent);
+    if (ancestors.length > 0){
       try{
-        if(descendants[0].length > 0){
-          for(let i=0; i<descendants.length; i++){
-            children.push(descendants[i])
+        if(ancestors[0].length > 0){
+          for(let i=0; i<ancestors.length; i++){
+            lineage.push(ancestors[i])
           }
         }
       } catch( e ){
@@ -153,11 +123,52 @@ function getDescendants(people, person) {
     }
   });
 
-  return children;
+  return lineage;
+} // end of getAncestors function
+
+function findAncestors(people, person){
+  return people.filter( personSearch => personSearch.id === person.parents[0] || personSearch.id === person.parents[1]);
 }
 
-function getChildren(people, person){
-  return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
+console.log(getAncestors(data, data[21]));
+
+// These functions check to see if any people share parents
+// Create a function that will serve to find siblings of person searched
+// Create a new array that will display anyone that shares a parent with person searched
+// test index 16 - 19
+function getSiblings(people, person) {
+  let siblings = new Array();
+
+  siblings = findSiblings(people, person);
+  if (siblings === undefined || siblings.length == 0) {
+    return siblings;
+  }
+
+  return siblings;
+} //end of function
+
+function findSiblings(people, person){
+  let siblingsIncludingPerson = people.filter(personSearch => personSearch.parents[0] === person.parents[0] || personSearch.parents[1] === person.parents[1]);
+  let siblingsWithoutPerson = siblingsIncludingPerson.filter(personSearch => personSearch.id != person.id); 
+  return siblingsWithoutPerson;
+}
+
+// These functions check to see if person searched has a spouse
+// Create a function that will serve to look at the Spouse id of person searched and return it
+
+function getSpouse(people, person) {
+  let spouse = new Array();
+
+  spouse = findSpouse(people, person);
+  if (spouse === undefined || spouse.length == 0) {
+  return spouse;
+  }
+
+  return spouse;
+}
+
+function findSpouse(people, person){
+  return people.filter( personSearch => personSearch.currentSpouse === person.id);
 }
 
 // alerts a list of people
@@ -203,24 +214,29 @@ function chars(input){
   return true; // default validation only
 }
 
+function findPersonById(people, personId) {
+  let foundPerson = people.filter(person => person.id === personId);
+  return foundPerson[0];
+}
 
 function getParents(people, person) {
   let getParentIds = person.parents;
   let parents = people.filter(person => person.id === getParentIds[0] || person.id === getParentIds[1]);
   return parents;
 }
-/*
+
 function displayPerson(person){
-  let infoId = document.getElementsByClassName("id-number")[0];
-  let infoFullName = document.getElementsByClassName("full-name")[0];
-  let infoGender = document.getElementsByClassName("gender")[0];
-  let infoDob = document.getElementsByClassName("dob")[0];
-  let infoHeight = document.getElementsByClassName("height")[0];
-  let infoWeight = document.getElementsByClassName("weight")[0];
-  let infoEyeColor = document.getElementsByClassName("eye-color")[0];
-  let infoOccupation = document.getElementsByClassName("occupation")[0];
-  let infoParents = document.getElementsByClassName("parents")[0];
-  let infoCurrentSpouse = document.getElementsByClassName("current-spouse")[0];
+  printDisplayDiv();
+  let infoId = document.getElementsByClassName("id-number")[displayPersonIndex];
+  let infoFullName = document.getElementsByClassName("full-name")[displayPersonIndex];
+  let infoGender = document.getElementsByClassName("gender")[displayPersonIndex];
+  let infoDob = document.getElementsByClassName("dob")[displayPersonIndex];
+  let infoHeight = document.getElementsByClassName("height")[displayPersonIndex];
+  let infoWeight = document.getElementsByClassName("weight")[displayPersonIndex];
+  let infoEyeColor = document.getElementsByClassName("eye-color")[displayPersonIndex];
+  let infoOccupation = document.getElementsByClassName("occupation")[displayPersonIndex];
+  let infoParents = document.getElementsByClassName("parents")[displayPersonIndex];
+  let infoCurrentSpouse = document.getElementsByClassName("current-spouse")[displayPersonIndex];
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   infoId.innerHTML = "ID: " + person.id;
@@ -233,14 +249,26 @@ function displayPerson(person){
   infoOccupation.innerHTML = "Occupation: " + person.occupation;
   infoParents.innerHTML = "Parents: " + person.parents;
   infoCurrentSpouse.innerHTML = "Current Spouse: " + person.currentSpouse;
-} */
+  displayPersonIndex++;
+}
 
 function displayPeople(people){
-  var personRef = document.getElementById("personRef");
-  let displayPeople = document.getElementById("peopleDisplay");
-  displayPeople.innerHTML += personRef.innerHTML;
+  clearDiv();
+  people.map(person => {
+    return displayPerson(person);
+  });
+}
+
+function printDisplayDiv(){
+  let original = document.getElementById("display-ref");
+  let displayPeople = document.getElementById("display-people");
+  let clone = original.firstElementChild.cloneNode(true);
+  clone.classList.remove("hidden");
+  displayPeople.append(clone);
 }
 
 
-console.log(getDescendants(data, data[8]));
-displayPeople(findPersonById(data, 629807187));
+function clearDiv(){
+  displayPersonIndex = 0;
+  document.getElementById("display-people").innerHTML = "";
+}

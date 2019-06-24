@@ -5,7 +5,7 @@ body {
 	text-align: center;
 }
 
-/*  */
+/* Display Person/People  */
 .container {
 	background-color: rgb(241, 241, 241);
 	border-radius: 10px;
@@ -35,6 +35,10 @@ body {
 	margin: auto;
 }
 
-#personRef{
+#display-people {
+	display: flex;
+}
+
+.hidden {
 	display: none;
 }
