@@ -273,7 +273,6 @@ function printDisplayDiv(){
   displayPeople.append(clone);
 }
 
-
 function clearDiv(){
   displayPersonIndex = 0;
   document.getElementById("display-people").innerHTML = "";
