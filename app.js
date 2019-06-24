@@ -80,18 +80,32 @@ function searchPeople(){
 }
 
 // returns multidimensional array of children
+//These functions check for ancestors
 function getDescendants(people, person) {
-  let children = new Array();
+  let children = new Array(Array());
 
-  children = getChildren(people, person);
-  if (children === undefined || children.length == 0) {
-    return children;
+  children[0] = getChildren(people, person);
+
+
+  if (children[0] === undefined || children[0].length == 0) {
+    return children[0];
   }
 
-  children.map(child => {
+  children[0].map(child => {
     let descendants = getDescendants(people, child);
-    if (descendants.length > 0) children.push(descendants);
+    if (descendants.length > 0){
+      try{
+        if(descendants[0].length > 0){
+          for(let i=0; i<descendants.length; i++){
+            children.push(descendants[i]);
+          }
+        }
+      } catch( e ){
+        children.push(descendants);
+      }
+    }
   });
+
   return children;
 }
 
@@ -227,6 +241,7 @@ function getParents(people, person) {
 
 function displayPerson(person){
   printDisplayDiv();
+  let infoImage = document.getElementsByClassName("displayPerson")[displayPersonIndex].getElementsByTagName("img")[0];
   let infoId = document.getElementsByClassName("id-number")[displayPersonIndex];
   let infoFullName = document.getElementsByClassName("full-name")[displayPersonIndex];
   let infoGender = document.getElementsByClassName("gender")[displayPersonIndex];
@@ -239,6 +254,11 @@ function displayPerson(person){
   let infoCurrentSpouse = document.getElementsByClassName("current-spouse")[displayPersonIndex];
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
+  if(person.gender == "male"){
+    infoImage.src = "images/men/" + person.id + ".jpg";
+  } else if(person.gender == "women"){
+    infoImage.src = "images/women/" + person.id + ".jpg";
+  }
   infoId.innerHTML = "ID: " + person.id;
   infoFullName.innerHTML = "Full Name: " + person.firstName + " " + person.lastName;
   infoGender.innerHTML = "Gender: " + person.gender;
