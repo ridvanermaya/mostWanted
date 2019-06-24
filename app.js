@@ -45,28 +45,41 @@ function findPersonById(people, personId) {
 
 function searchByTraits(people, criteria){
   let foundPeople = people;
-  
+  let nanFlag = true;
+
   if(criteria.eyeColor !== undefined && criteria.eyeColor != ""){
     foundPeople = foundPeople.filter(person => person.eyeColor == criteria.eyeColor);
+    nanFlag = false;
   }
   if(criteria.gender !== undefined && criteria.gender != ""){
     foundPeople = foundPeople.filter(person => person.gender == criteria.gender);
+    nanFlag = false;
   }
   if(criteria.firstName !== undefined && criteria.firstName != ""){
     foundPeople = foundPeople.filter(person => person.firstName == criteria.firstName);
+    nanFlag = false;
   }
   if(criteria.lastName !== undefined && criteria.lastName != ""){
     foundPeople = foundPeople.filter(person => person.lastName == criteria.lastName);
+    nanFlag = false;
   }
   if(criteria.occupation !== undefined && criteria.occupation != ""){
     foundPeople = foundPeople.filter(person => person.occupation == criteria.occupation);
+    nanFlag = false;
   }
   if(criteria.age !== undefined && criteria.age !== ""){
     foundPeople = foundPeople.filter(person => person.age == criteria.age);
+    nanFlag = false;
   }
   if(foundPeople.length == 0){
     document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>No match found! Please check your criteria.</h1>";
   }
+
+  if(nanFlag){
+    document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>You Entered Nothing. At least 1 criterion required</h1>";
+    return undefined;
+  }
+
   return foundPeople;
 }
 
@@ -284,21 +297,29 @@ function displayPerson(person){
   infoOccupation.innerHTML = "Occupation: " + person.occupation;
   infoParents.innerHTML = "Parents: " + person.parents;
   infoCurrentSpouse.innerHTML = "Current Spouse: " + person.currentSpouse;
+
   getDescendantsBtn.onclick = function(){
+
     clearDiv();
+
     let descendants = getDescendants(data, person);
+
     if(descendants.length === 0){
       document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>No Descendants Found!</h1>";
     }
+
     //loopa threw every generation
     for(let index = 0; index < descendants.length; index++ ){
       //loop through every child in generation
       document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Generation " + (index + 1) + "</h1>";
       displayPeople(descendants[index]);
+      console.log(descendants[index]);
     }
   }
+
   displayImmediateFamilyMembersBtn.onclick = function(){
     clearDiv();
+
     let parents = getParents(data, person);
     let children = getChildren(data, person);
     let spouse = getSpouse(data, person);
@@ -320,6 +341,7 @@ function displayPerson(person){
       displayPeople(siblings);
     }
   }
+
   displayPersonIndex++;
 }
 
