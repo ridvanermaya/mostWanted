@@ -3,7 +3,6 @@ Build all of your functions for displaying and gathering information below (GUI)
 */
 // app is the function called to start the entire application
 let displayPersonIndex = 0;
-
 addAge(data);
 
 function addDescriptiveData(){
