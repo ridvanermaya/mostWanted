@@ -64,6 +64,9 @@ function searchByTraits(people, criteria){
   if(criteria.age !== undefined && criteria.age !== ""){
     foundPeople = foundPeople.filter(person => person.age == criteria.age);
   }
+  if(foundPeople.length == 0){
+    document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>No match found! Please check your criteria.</h1>";
+  }
   return foundPeople;
 }
 
@@ -86,7 +89,6 @@ function getDescendants(people, person) {
 
   children[0] = getChildren(people, person);
 
-
   if (children[0] === undefined || children[0].length == 0) {
     return children[0];
   }
@@ -105,7 +107,6 @@ function getDescendants(people, person) {
       }
     }
   });
-
   return children;
 }
 
@@ -136,15 +137,12 @@ function getAncestors(people, person) {
       }
     }
   });
-
   return lineage;
 } // end of getAncestors function
 
 function findAncestors(people, person){
   return people.filter( personSearch => personSearch.id === person.parents[0] || personSearch.id === person.parents[1]);
 }
-
-console.log(getAncestors(data, data[21]));
 
 // These functions check to see if any people share parents
 // Create a function that will serve to find siblings of person searched
@@ -183,13 +181,6 @@ function getSpouse(people, person) {
 
 function findSpouse(people, person){
   return people.filter( personSearch => personSearch.currentSpouse === person.id);
-}
-
-// alerts a list of people
-function displayPeople(people){
-  alert(people.map(function(person){
-    return displayPerson(person);
-  }).join("\n"));
 }
 
 function getPersonAge(dob) {
@@ -252,11 +243,14 @@ function displayPerson(person){
   let infoOccupation = document.getElementsByClassName("occupation")[displayPersonIndex];
   let infoParents = document.getElementsByClassName("parents")[displayPersonIndex];
   let infoCurrentSpouse = document.getElementsByClassName("current-spouse")[displayPersonIndex];
+  let getDescendantsBtn = document.getElementsByClassName("get-descendants-btn")[displayPersonIndex];
+  let getAncestorsBtn = document.getElementsByClassName("get-ancestors-btn")[displayPersonIndex];
+  let displayImmediateFamilyMembersBtn = document.getElementsByClassName("display-immediate-family-members-btn")[displayPersonIndex];
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   if(person.gender == "male"){
     infoImage.src = "images/men/" + person.id + ".jpg";
-  } else if(person.gender == "women"){
+  } else if(person.gender == "female"){
     infoImage.src = "images/women/" + person.id + ".jpg";
   }
   infoId.innerHTML = "ID: " + person.id;
@@ -269,11 +263,46 @@ function displayPerson(person){
   infoOccupation.innerHTML = "Occupation: " + person.occupation;
   infoParents.innerHTML = "Parents: " + person.parents;
   infoCurrentSpouse.innerHTML = "Current Spouse: " + person.currentSpouse;
+  getDescendantsBtn.onclick = function(){
+    clearDiv();
+    let descendants = getDescendants(data, person);
+    if(descendants.length === 0){
+      document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>No Descendants Found!</h1>";
+    }
+    //loopa threw every generation
+    for(let index = 0; index < descendants.length; index++ ){
+      //loop through every child in generation
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Generation " + (index + 1) + "</h1>";
+      displayPeople(descendants[index]);
+    }
+  }
+  displayImmediateFamilyMembersBtn.onclick = function(){
+    clearDiv();
+    let parents = getParents(data, person);
+    let children = getChildren(data, person);
+    let spouse = getSpouse(data, person);
+    let siblings = getSiblings(data, person);
+    if(parents.length > 0){
+      document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'> Parents </h1>";
+      displayPeople(parents);
+    }
+    if(children.length > 0){
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Children </h1>";
+      displayPeople(children);
+    }
+    if(spouse.length > 0){
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Spouse </h1>";
+      displayPeople(spouse);
+    }
+    if(siblings.length > 0){
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Siblings </h1>";
+      displayPeople(siblings);
+    }
+  }
   displayPersonIndex++;
 }
 
 function displayPeople(people){
-  clearDiv();
   people.map(person => {
     return displayPerson(person);
   });
