@@ -109,31 +109,32 @@ function getDescendants(people, person) {
   return children;
 }
 
-console.log(getDescendants(data, data[8]));
+
 function getChildren(people, person){
   return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
 }
 
 //These functions check for ancestors
 function getAncestors(people, person) {
-  let lineage = new Array();
+  let lineage = new Array(Array());
 
-  lineage = findAncestors(people, person);
-  if (lineage === undefined || lineage.length == 0) {
-    return lineage;
+  lineage[0] = findAncestors(people, person);
+
+  if (lineage[0] === undefined || lineage[0].length == 0) {
+    return lineage[0];
   }
 
-  lineage.map(parent => {
+  lineage[0].map(parent => {
     let ancestors = getAncestors(people, parent);
     if (ancestors.length > 0){
       try{
         if(ancestors[0].length > 0){
           for(let i=0; i<ancestors.length; i++){
-            lineage.push(ancestors[i])
+            lineage.push(ancestors[i]);
           }
         }
       } catch( e ){
-        children.push(descendants);
+        lineage.push(ancestors);
       }
     }
   });
