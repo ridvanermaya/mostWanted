@@ -145,11 +145,13 @@ function findAncestors(people, person){
   return people.filter( personSearch => personSearch.id === person.parents[0] || personSearch.id === person.parents[1]);
 }
 
-console.log(getAncestors(data, data[21]));
+console.log(getAncestors(data, data[12]));
 
 // These functions check to see if any people share parents
 // Create a function that will serve to find siblings of person searched
 // Create a new array that will display anyone that shares a parent with person searched
+// The findSiblings function serves as a function to filter through the data objects and find the people who's parents' ids match the parents parameter of the person searched
+// To avoid the
 // test index 16 - 19
 function getSiblings(people, person) {
   let siblings = new Array();
@@ -163,10 +165,27 @@ function getSiblings(people, person) {
 } //end of function
 
 function findSiblings(people, person){
-  let siblingsIncludingPerson = people.filter(personSearch => personSearch.parents[0] === person.parents[0] || personSearch.parents[1] === person.parents[1]);
-  let siblingsWithoutPerson = siblingsIncludingPerson.filter(personSearch => personSearch.id != person.id); 
-  return siblingsWithoutPerson;
+  let siblingsIncludingPerson;
+  let siblingsWithoutPerson;
+  if (person.parents.length !== 0 || person.parents[0] !== undefined) {
+    let siblingsIncludingPerson = people.filter(function(personSearch){
+      if(personSearch.parents[0] === person.parents[0]) {
+        return true;
+      }
+
+      if(personSearch.parents.length == 2){
+        if (personSearch.parents[1] === person.parents[1]) {
+          return true;
+        }
+      }
+      return false;
+    });
+    let siblingsWithoutPerson = siblingsIncludingPerson.filter(personSearch => personSearch.id != person.id); 
+    return siblingsWithoutPerson;
+  }
 }
+
+// console.log(getSiblings(data, data[22]));
 
 // These functions check to see if person searched has a spouse
 // Create a function that will serve to look at the Spouse id of person searched and return it
