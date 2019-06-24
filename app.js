@@ -162,7 +162,41 @@ function getChildren(people, person){
 
 // console.log(getDescendants(data, data[8]));
 
-// These functions checks to see if any people share parents
+
+//These functions check for ancestors
+function getAncestors(people, person) {
+  let lineage = new Array();
+
+  lineage = findAncestors(people, person);
+  if (lineage === undefined || lineage.length == 0) {
+    return lineage;
+  }
+
+  lineage.map(parent => {
+    let ancestors = getAncestors(people, parent);
+    if (ancestors.length > 0){
+      try{
+        if(ancestors[0].length > 0){
+          for(let i=0; i<ancestors.length; i++){
+            lineage.push(ancestors[i])
+          }
+        }
+      } catch( e ){
+        children.push(descendants);
+      }
+    }
+  });
+
+  return lineage;
+} // end of getAncestors function
+
+function findAncestors(people, person){
+  return people.filter( personSearch => personSearch.id === person.parents[0] || personSearch.id === person.parents[1]);
+}
+
+console.log(getAncestors(data, data[21]));
+
+// These functions check to see if any people share parents
 // Create a function that will serve to find siblings of person searched
 // Create a new array that will display anyone that shares a parent with person searched
 // test index 16 - 19
@@ -173,6 +207,7 @@ function getSiblings(people, person) {
   if (siblings === undefined || siblings.length == 0) {
     return siblings;
   }
+
   return siblings;
 } //end of function
 
@@ -182,7 +217,27 @@ function findSiblings(people, person){
   return siblingsWithoutPerson;
 }
 
-console.log(getSiblings(data, data[16]));
+// console.log(getSiblings(data, data[16]));
+
+// These functions check to see if person searched has a spouse
+// Create a function that will serve to look at the Spouse id of person searched and return it
+
+function getSpouse(people, person) {
+  let spouse = new Array();
+
+  spouse = findSpouse(people, person);
+  if (spouse === undefined || spouse.length == 0) {
+  return spouse;
+  }
+
+  return spouse;
+}
+
+function findSpouse(people, person){
+  return people.filter( personSearch => personSearch.currentSpouse === person.id);
+}
+
+// console.log(getSpouse(data, data[19]));
 
 // alerts a list of people
 function displayPeople(people){
