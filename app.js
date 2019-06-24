@@ -143,10 +143,6 @@ function getDescendants(people, person) {
   return children;
 }
 
-
-  return children;
-}
-
 function getChildren(people, person){
   return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
 }
