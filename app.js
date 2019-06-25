@@ -108,6 +108,7 @@ function getDescendants(people, person) {
 
   children[0].map(child => {
     let descendants = getDescendants(people, child);
+    
     if (descendants.length > 0){
       try{
         if(descendants[0].length > 0){
@@ -120,6 +121,7 @@ function getDescendants(people, person) {
       }
     }
   });
+
   return children;
 }
 
