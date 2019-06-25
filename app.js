@@ -5,12 +5,6 @@ Build all of your functions for displaying and gathering information below (GUI)
 let displayPersonIndex = 0;
 addAge(data);
 
-function addDescriptiveData(){
-  let people = data.map(function(person){ person.age = getAge(person); return person; });
-
-  return people;
-}
-
 function capitalize(s){
   let capitalized = String.fromCharCode(s.charCodeAt(0)-32);
 
@@ -25,22 +19,7 @@ function capitalize(s){
       capitalized += s[i];
     }
   }
-
   return capitalized;
-}
-
-function searchByName(people){
-  var firstName = capitalize(promptFor("What is the person's first name?", chars).toLowerCase());
-  var lastName = capitalize(promptFor("What is the person's last name?", chars).toLowerCase());
-
-  var foundPerson = people.filter(person => person.lastName == lastName && person.firstName == firstName);
-  return foundPerson[0];
-}
-
-function findPersonById(people, personId) {
-  let foundPerson = people.filter(person => person.id == personId);
-
-  return foundPerson[0];
 }
 
 function searchByTraits(people, criteria){
@@ -74,12 +53,10 @@ function searchByTraits(people, criteria){
   if(foundPeople.length == 0){
     document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>No match found! Please check your criteria.</h1>";
   }
-
   if(nanFlag){
-    document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>You Entered Nothing. At least 1 criterion required</h1>";
+    document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>You Entered Nothing. At least 1 criterion is required!</h1>";
     return undefined;
   }
-
   return foundPeople;
 }
 
@@ -124,7 +101,6 @@ function getDescendants(people, person) {
 
   return children;
 }
-
 
 function getChildren(people, person){
   return people.filter( personSearch => personSearch.parents[0] === person.id || personSearch.parents[1] === person.id);
@@ -174,7 +150,6 @@ function getSiblings(people, person) {
   if (siblings === undefined || siblings.length == 0) {
     return siblings;
   }
-
   return siblings;
 } //end of function
 
@@ -186,7 +161,6 @@ function findSiblings(people, person){
       if(personSearch.parents[0] === person.parents[0]) {
         return true;
       }
-
       if(personSearch.parents.length == 2){
         if (personSearch.parents[1] === person.parents[1]) {
           return true;
@@ -211,7 +185,6 @@ function getSpouse(people, person) {
   if (spouse === undefined || spouse.length == 0) {
   return spouse;
   }
-
   return spouse;
 }
 
@@ -235,24 +208,6 @@ function addAge(people){
   for (let index = 0; index < people.length; index++) {
     people[index].age = getPersonAge(people[index].dob);
   }
-}
-
-// function that prompts and validates user input
-function promptFor(question, valid){  // "valid" is a callback!
-  do{
-    var response = prompt(question).trim();
-  } while(!response || !valid(response));
-  return response;
-}
-
-// helper function to pass into promptFor to validate yes/no answers
-function yesNo(input){
-  return input.toLowerCase() == "yes" || input.toLowerCase() == "no";
-}
-
-// helper function to pass in as default promptFor validation
-function chars(input){
-  return true; // default validation only
 }
 
 function findPersonById(people, personId) {
@@ -301,21 +256,28 @@ function displayPerson(person){
   infoCurrentSpouse.innerHTML = "Current Spouse: " + person.currentSpouse;
 
   getDescendantsBtn.onclick = function(){
-
     clearDiv();
-
     let descendants = getDescendants(data, person);
-
     if(descendants.length === 0){
       document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>No Descendants Found!</h1>";
     }
-
     //loopa threw every generation
     for(let index = 0; index < descendants.length; index++ ){
       //loop through every child in generation
-      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Generation " + (index + 1) + "</h1>";
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'>Generation " + (index + 1) + "</h1>";
       displayPeople(descendants[index]);
-      console.log(descendants[index]);
+    }
+  };
+
+  getAncestorsBtn.onclick = function(){
+    clearDiv();
+    let ancestors = getAncestors(data, person);
+    if(ancestors.length === 0){
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'>No Ancestors Found!</h1>";
+    }
+    for (let index = 0; index < ancestors.length; index++) {
+      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'>Ancestors Generation " + (index + 1) + "</h1>";
+      displayPeople(ancestors[index]);
     }
   }
 
@@ -343,7 +305,6 @@ function displayPerson(person){
       displayPeople(siblings);
     }
   }
-
   displayPersonIndex++;
 }
 
