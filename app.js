@@ -221,6 +221,10 @@ function getParents(people, person) {
   return parents;
 }
 
+function descendantsBtn(people, person){
+
+}
+
 function displayPerson(person){
   printDisplayDiv();
   let infoImage = document.getElementsByClassName("displayPerson")[displayPersonIndex].getElementsByTagName("img")[0];
@@ -261,12 +265,7 @@ function displayPerson(person){
     if(descendants.length === 0){
       document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'>No Descendants Found!</h1>";
     }
-    //loopa threw every generation
-    for(let index = 0; index < descendants.length; index++ ){
-      //loop through every child in generation
-      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'>Generation " + (index + 1) + "</h1>";
-      displayPeople(descendants[index]);
-    }
+    displayDescendants(descendants);
   };
 
   getAncestorsBtn.onclick = function(){
@@ -283,35 +282,84 @@ function displayPerson(person){
 
   displayImmediateFamilyMembersBtn.onclick = function(){
     clearDiv();
+    displayImmediateFamily(person);
+  }
+  displayPersonIndex++;
+}
+
+
+function displayPeople(people){
+
+      people.map(person => {
+        return displayPerson(person);
+      });
+    
+}
+
+function displayDescendants(people){
+    let i = 0;
+    people.map( peeps => {
+      i++;
+      var node = document.createElement("h1");
+      var textNode = document.createTextNode("Generation: " + i);
+      node.className = "col-12";
+      node.appendChild(textNode);
+      document.getElementById("display-people").appendChild(node);
+      peeps.map( person => {
+        return displayPerson(person);
+      });
+    });
+}
+
+function displayImmediateFamily(person){
+    familyArr = new Array(Array());
 
     let parents = getParents(data, person);
     let children = getChildren(data, person);
     let spouse = getSpouse(data, person);
     let siblings = getSiblings(data, person);
+
+
     if(parents.length > 0){
-      document.getElementById("display-people").innerHTML = "<h1 class = 'col-12'> Parents </h1>";
-      displayPeople(parents);
+      var node = document.createElement("h1");
+      var textNode = document.createTextNode("Parents");
+      node.appendChild(textNode);
+      document.getElementById("display-people").appendChild(node);
+      node.className = "col-12";
+      for(let i=0; i<parents.length; i++){
+        displayPerson(parents[i]);
+      }
     }
     if(children.length > 0){
-      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Children </h1>";
-      displayPeople(children);
+      var node = document.createElement("h1");
+      var textNode = document.createTextNode("Children");
+      node.appendChild(textNode);
+      node.className = "col-12";
+      document.getElementById("display-people").appendChild(node);
+      for(let i=0; i<children.length; i++){
+        displayPerson(children[i]);
+      }
     }
     if(spouse.length > 0){
-      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Spouse </h1>";
-      displayPeople(spouse);
+      var node = document.createElement("h1");
+      var textNode = document.createTextNode("Spouse");
+      node.appendChild(textNode);
+      node.className = "col-12";
+      document.getElementById("display-people").appendChild(node);
+      for(let i=0; i<spouse.length; i++){
+        displayPerson(spouse[i]);
+      }
     }
     if(siblings.length > 0){
-      document.getElementById("display-people").innerHTML += "<h1 class = 'col-12'> Siblings </h1>";
-      displayPeople(siblings);
+      var node = document.createElement("h1");
+      var textNode = document.createTextNode("Siblings");
+      node.appendChild(textNode);
+      node.className = "col-12";
+      document.getElementById("display-people").appendChild(node);
+      for(let i=0; i<siblings.length; i++){
+        displayPerson(siblings[i]);
+      }
     }
-  }
-  displayPersonIndex++;
-}
-
-function displayPeople(people){
-  people.map(person => {
-    return displayPerson(person);
-  });
 }
 
 function printDisplayDiv(){
